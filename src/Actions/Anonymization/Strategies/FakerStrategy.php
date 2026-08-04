@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Xve\DbExport\Actions\Anonymization\Strategies;
 
+use Faker\Factory;
 use Xve\DbExport\Contracts\AnonymizationStrategyInterface;
 use Xve\DbExport\Exceptions\AnonymizationException;
 
@@ -15,12 +16,12 @@ class FakerStrategy implements AnonymizationStrategyInterface
 
     public function __construct(?object $faker = null)
     {
-        $this->fakerAvailable = class_exists(\Faker\Factory::class);
+        $this->fakerAvailable = class_exists(Factory::class);
 
         if ($faker !== null) {
             $this->faker = $faker;
         } elseif ($this->fakerAvailable) {
-            $this->faker = \Faker\Factory::create();
+            $this->faker = Factory::create();
         }
     }
 
@@ -155,7 +156,7 @@ class FakerStrategy implements AnonymizationStrategyInterface
     public function setLocale(string $locale): self
     {
         if ($this->fakerAvailable) {
-            $this->faker = \Faker\Factory::create($locale);
+            $this->faker = Factory::create($locale);
         }
 
         return $this;

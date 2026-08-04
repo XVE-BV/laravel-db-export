@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Xve\DbExport\Actions\Export;
 
+use Spatie\DbDumper\Databases\MySql;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\NullOutput;
@@ -164,7 +165,7 @@ class ExecuteExportAction implements ExporterInterface
         // Export structure-only tables
         $structureDumper = $this->buildDumper->buildStructureOnlyDumper($config, $tables);
 
-        if ($structureDumper instanceof \Spatie\DbDumper\Databases\MySql) {
+        if ($structureDumper instanceof MySql) {
             $structureOnlyCount = count(array_filter($tables, fn (TableInfo $t): bool => $t->structureOnly));
             $this->advanceProgress('Exporting '.$structureOnlyCount.' structure-only tables...');
 

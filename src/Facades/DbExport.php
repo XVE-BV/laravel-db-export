@@ -6,6 +6,7 @@ namespace Xve\DbExport\Facades;
 
 use Illuminate\Support\Facades\Facade;
 use Xve\DbExport\Config\ExportConfig;
+use Xve\DbExport\DbExportManager;
 use Xve\DbExport\DTOs\ExportResult;
 use Xve\DbExport\DTOs\SizeEstimate;
 
@@ -18,7 +19,7 @@ use Xve\DbExport\DTOs\SizeEstimate;
  * @method static \Xve\DbExport\DbExportManager forConnection(string $connection)
  * @method static \Xve\DbExport\DbExportManager withProfile(string $profile)
  *
- * @see \Xve\DbExport\DbExportManager
+ * @see DbExportManager
  */
 class DbExport extends Facade
 {
