@@ -10,11 +10,6 @@ use Xve\DbExport\Facades\DbExport;
 
 abstract class TestCase extends Orchestra
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-    }
-
     protected function getPackageProviders($app): array
     {
         return [
