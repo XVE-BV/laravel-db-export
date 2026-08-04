@@ -84,7 +84,7 @@ class AnonymizeTableAction implements AnonymizerInterface
     protected function anonymizeRow(string $table, array $row, array $rules, ?AnonymizationConfig $config = null): array
     {
         // Check if this specific row should be preserved (e.g., admin emails)
-        if ($config instanceof \Xve\DbExport\Config\AnonymizationConfig && $config->shouldPreserveRow($table, $row)) {
+        if ($config instanceof AnonymizationConfig && $config->shouldPreserveRow($table, $row)) {
             return $row;
         }
 

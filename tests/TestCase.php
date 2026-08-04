@@ -6,14 +6,10 @@ namespace Xve\DbExport\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
 use Xve\DbExport\DbExportServiceProvider;
+use Xve\DbExport\Facades\DbExport;
 
 abstract class TestCase extends Orchestra
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-    }
-
     protected function getPackageProviders($app): array
     {
         return [
@@ -24,7 +20,7 @@ abstract class TestCase extends Orchestra
     protected function getPackageAliases($app): array
     {
         return [
-            'DbExport' => \Xve\DbExport\Facades\DbExport::class,
+            'DbExport' => DbExport::class,
         ];
     }
 

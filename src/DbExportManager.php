@@ -183,7 +183,7 @@ class DbExportManager
      */
     protected function prepareConfig(?ExportConfig $config): ExportConfig
     {
-        if (! $config instanceof \Xve\DbExport\Config\ExportConfig) {
+        if (! $config instanceof ExportConfig) {
             $config = new ExportConfig(
                 connection: $this->connection,
                 profile: $this->profile

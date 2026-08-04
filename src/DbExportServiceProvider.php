@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Xve\DbExport;
 
+use Illuminate\Config\Repository;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\ServiceProvider;
 use Xve\DbExport\Commands\EstimateCommand;
 use Xve\DbExport\Commands\ExportCommand;
@@ -28,7 +30,7 @@ class DbExportServiceProvider extends ServiceProvider
         );
 
         $this->app->singleton(ProfileManager::class, function (Application $app): ProfileManager {
-            /** @var \Illuminate\Config\Repository $config */
+            /** @var Repository $config */
             $config = $app->make('config');
             /** @var array<string, array<string, mixed>> $profiles */
             $profiles = $config->get('db-export.profiles', []);
@@ -63,7 +65,7 @@ class DbExportServiceProvider extends ServiceProvider
     protected function registerContracts(): void
     {
         $this->app->bind(TableResolverInterface::class, function (Application $app): Actions\Tables\ResolveTablesAction {
-            /** @var \Illuminate\Database\DatabaseManager $db */
+            /** @var DatabaseManager $db */
             $db = $app->make('db');
 
             return new Actions\Tables\ResolveTablesAction(
@@ -73,14 +75,14 @@ class DbExportServiceProvider extends ServiceProvider
         });
 
         $this->app->bind(SizeEstimatorInterface::class, function (Application $app): Actions\Estimation\EstimateSizeAction {
-            /** @var \Illuminate\Database\DatabaseManager $db */
+            /** @var DatabaseManager $db */
             $db = $app->make('db');
 
             return new Actions\Estimation\EstimateSizeAction($db);
         });
 
         $this->app->bind(DiskCheckerInterface::class, function (Application $app): Actions\Estimation\CheckDiskSpaceAction {
-            /** @var \Illuminate\Config\Repository $config */
+            /** @var Repository $config */
             $config = $app->make('config');
             /** @var array<string, mixed> $diskCheck */
             $diskCheck = $config->get('db-export.disk_check', []);

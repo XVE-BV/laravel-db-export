@@ -8,6 +8,7 @@ use Illuminate\Console\Command;
 use Xve\DbExport\Actions\Estimation\GenerateBreakdownAction;
 use Xve\DbExport\Config\ExportConfig;
 use Xve\DbExport\DbExportManager;
+use Xve\DbExport\DTOs\SizeEstimate;
 
 class EstimateCommand extends Command
 {
@@ -77,7 +78,7 @@ class EstimateCommand extends Command
     }
 
     /**
-     * @param  \Xve\DbExport\DTOs\SizeEstimate  $estimate
+     * @param  SizeEstimate  $estimate
      */
     protected function displaySummary($estimate): void
     {
